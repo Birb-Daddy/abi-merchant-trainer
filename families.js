@@ -18,12 +18,14 @@ $('lst3').onclick=()=>{if(!$('lfsel').hidden)return;famUI(true);list()};
 ['lst1'].forEach(x=>$(x).addEventListener('click',()=>{if(!$('lfsel').hidden)famUI(false)}));
 $('lpool').addEventListener('change',()=>{if(!$('lfsel').hidden)list()});
 let st;
+// weighted sampling without replacement (weight = 1 + rounds since last shown as correct)
+function wpick(ids,k,w){const c=ids.slice(),o=[];while(o.length<k&&c.length){const tot=c.reduce((t,x)=>t+w(x),0);let r=Math.random()*tot,j=0;for(;j<c.length-1;j++){r-=w(c[j]);if(r<0)break}o.push(c.splice(j,1)[0])}return o}
 function start(list,weak){const items=pool();F=fams(items);
- st={weak,sounds:shuf(list),k:0,seenBy:{},visited:[],items,t0:Date.now(),hit:0,miss:0,fp:0,r:0};startSound();['modesel','lmenu','lweak'].forEach(x=>$(x).hidden=true);$('lfam').hidden=false;round()}
+ st={weak,sounds:shuf(list),k:0,seenBy:{},dryBy:{},visited:[],items,t0:Date.now(),hit:0,miss:0,fp:0,r:0};startSound();['modesel','lmenu','lweak'].forEach(x=>$(x).hidden=true);$('lfam').hidden=false;round()}
 $('lfstart').onclick=()=>start([...picked]);
 function startSound(){const s=st.sounds[st.k];st.s=s;st.seen=st.seenBy[s]=st.seenBy[s]||new Set();st.last='';if(!st.visited.includes(s))st.visited.push(s);$('lfskip').hidden=st.sounds.length<2}
 function round(){const s=st.s;st.r++;
- const ids=F[s].map(i=>i.id);let correct,key,t=0;do{const k=Math.min(ids.length,1+(Math.random()*4|0));correct=shuf(ids).slice(0,k);key=correct.slice().sort().join()}while(key===st.last&&++t<20);st.last=key;correct.forEach(id=>st.seen.add(id));correct=correct.map(id=>byId[id]);
+ const ids=F[s].map(i=>i.id),dry=st.dryBy[s]=st.dryBy[s]||{};let correct,key,t=0;do{const k=Math.min(ids.length,1+(Math.random()*4|0));correct=wpick(ids,k,id=>1+(dry[id]||0));key=correct.slice().sort().join()}while(key===st.last&&++t<20);st.last=key;ids.forEach(id=>dry[id]=correct.includes(id)?0:(dry[id]||0)+1);correct.forEach(id=>st.seen.add(id));correct=correct.map(id=>byId[id]);
  const famIds=new Set(F[s].map(i=>i.id)),used=new Set(correct.map(i=>i.id));
  // distractors: other sounds' families (size>=2 only), weighted by family size
  let cands=st.items.filter(i=>String(i.s)!==String(s)&&(F[i.s]||[]).length>=2);const opts=correct.slice();
