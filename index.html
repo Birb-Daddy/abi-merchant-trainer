@@ -43,7 +43,7 @@
  <h2>Drill</h2><div class="row"><button id="lst1" class="sel">Stage 1: Sound → Anchor</button><button id="lst3">Stage 2: Families</button></div>
  <div id="ls1sel"><h2>Sounds to drill</h2><p class="hint">Stage 1: hear a pickup sound, pick its anchor.</p><div class="row" id="lbatches"></div><div id="lchecks" class="checks"></div></div>
  <div id="lcountsWrap"><h2>Questions</h2><div class="row" id="lcounts"></div><p class="hint">Adaptive: misses come back later until every card is right. Mastery (Stage 1): type each anchor once; scored with time.</p></div>
- <div id="lfsel" hidden><h2>Sounds to drill</h2><p class="hint">Stage 2: hear a sound, then tick every item (of 10) that makes it. Any number can be right; rounds continue until every family item has shown up. Only sounds with 3+ items on the selected map are listed. ▶ on a tile plays that item's own sound.</p><p class="hint" id="lfcount"></p><div class="row"><button id="lfall">All</button><button id="lfnone">None</button></div><div id="lfchecks" class="checks"></div><p class="hint" id="lfinfo"></p><button id="lfstart" class="big" disabled>START FAMILIES</button></div>
+ <div id="lfsel" hidden><h2>Sounds to drill</h2><p class="hint">Stage 2: hear a sound, then tick every item (of 10) that makes it. Any number can be right; each sound is endless — tap Next sound to move on (wraps around), Quit to finish. Only sounds with 3+ items on the selected map are listed. ▶ on a tile plays that item's own sound.</p><p class="hint" id="lfcount"></p><div class="row"><button id="lfall">All</button><button id="lfnone">None</button></div><div id="lfchecks" class="checks"></div><p class="hint" id="lfinfo"></p><button id="lfstart" class="big" disabled>START FAMILIES</button></div>
  <p class="hint" id="linfo"></p>
  <button id="lstart" class="big" disabled>START DRILL</button>
 </section>
@@ -71,7 +71,7 @@
  <div class="card"><p class="hint" id="lfprompt"></p><div class="row"><button id="lfplay">▶ Pick up</button></div>
   <div id="lftiles"></div><div id="lfres" class="reveal" hidden></div>
   <button id="lfsubmit" class="big">SUBMIT</button><button id="lfnext" class="big" hidden>NEXT</button></div>
- <button id="lfquit" class="link">Quit</button>
+ <div class="row" style="justify-content:space-between"><button id="lfskip">Next sound ⏭</button><button id="lfquit" class="link">Quit</button></div>
 </section>
 <section id="done" hidden><h2>Session complete</h2><p id="final"></p><button id="again" class="big">MENU</button></section>
 </main>
