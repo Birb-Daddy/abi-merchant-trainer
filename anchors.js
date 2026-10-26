@@ -1,0 +1,47 @@
+// EDIT YOUR ANCHORS HERE: sound ID -> the label you want to think of for that sound.
+// Labels are free text (they do not have to be merchant items).
+window.ANCHORS = {
+  1: "Film Stock",
+  2: "Fuel Tank",
+  3: "Large-Caliber Artillery Gunpowder Pack",
+  4: "Impact-resistant Hard Rubber",
+  5: "Bag of Cement",
+  6: "Car Battery",
+  7: "Rubber Pad",
+  8: "Acoustic Panel",
+  9: "Bios",
+  10: "VGA Cable",
+  11: "Power Cable",
+  12: "SSD",
+  13: "LCD",
+  14: "Studio Monitor",
+  15: "Battery",
+  16: "Solar Panel",
+  17: "Glue Gun",
+  18: "Silver Badge",
+  19: "Toolbox",
+  20: "Blowtorch",
+  21: "Photo Frame",
+  22: "Gold Watch",
+  23: "Bag of Fertilizer",
+  24: "Deluxe Tea Set",
+  25: "Lute",
+  26: "Syringe",
+  27: "Medical Sponge",
+  28: "Gold Lion Statue",
+  29: "Coin",
+  30: "Vase",
+  31: "Desk Clock",
+  32: "Antique Teapot",
+  33: "Gem Necklace",
+  34: "Stamp Album",
+  35: "Document",
+  36: "Plaster Sculpture",
+  37: "Folder",
+  38: "Radio",
+};
+// Optional notes shown on the Study page.
+window.ANCHOR_NOTES = {
+  38: "Heads up: the merchant item literally named \"Radio\" (2x1) makes sound 10, not this one. This sound is Military Radio / Classic Radio.",
+  10: "The item named \"Radio\" (2x1) is in this family, not sound 38."
+};

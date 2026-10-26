@@ -1,0 +1,72 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ABI Field Merchant Quiz</title><link rel="stylesheet" href="style.css"></head><body>
+<header><h1>FIELD MERCHANT <span>// TRAINER</span></h1></header>
+<main>
+<section id="modesel"><h2>Mode</h2><div class="row"><button id="mSound" class="sel">Sound Quiz</button><button id="mIcon">Item Icons</button><button id="mLearn">Learn</button></div></section>
+<section id="menu">
+ <h2>1. Map &amp; Mode</h2><div id="maps"></div>
+ <h2>2. Level</h2><div class="row" id="levels"></div>
+ <p class="hint" id="levelinfo"></p>
+ <h2>3. Questions</h2><div class="row" id="counts"></div>
+ <button id="start" class="big" disabled>START</button>
+</section>
+<section id="quiz" hidden>
+ <div class="bar"><span id="where"></span><span id="score"></span></div>
+ <div class="card">
+  <div class="size">SIZE <b id="qsize"></b></div>
+  <div class="row"><button id="pdrop">▶ Drop</button><button id="ppick">▶ Pick up</button><button id="pboth">▶ Both</button></div>
+  <p class="hint">Select every item that could make this sound at this size (0–5).</p>
+  <div id="opts"></div>
+  <button id="submit" class="big">SUBMIT</button>
+  <div id="reveal" hidden></div>
+  <button id="next" class="big" hidden>NEXT</button>
+ </div>
+ <button id="quit" class="link">Quit to menu</button>
+</section>
+<section id="imenu" hidden>
+ <h2>1. Item pool</h2><div class="row"><button id="iAll" class="sel">All merchant items</button></div><div id="imaps"></div>
+ <h2>2. Rarity</h2><div class="row" id="irar"></div>
+ <p class="hint" id="iinfo"></p>
+ <h2>3. Questions</h2><div class="row" id="icounts"></div>
+ <button id="istart" class="big" disabled>START</button>
+</section>
+<section id="iquiz" hidden>
+ <div class="bar"><span id="iwhere"></span><span id="iscore"></span></div>
+ <div class="card"><p class="hint">Which icon is this item?</p><div class="iname" id="iname"></div>
+  <div id="iopts"></div><div id="ireveal" hidden></div><button id="inext" class="big" hidden>NEXT</button></div>
+ <button id="iquit" class="link">Quit to menu</button>
+</section>
+<section id="lmenu" hidden>
+ <h2>Map filter (optional)</h2><select id="lpool"></select>
+ <button id="lstudyBtn" class="big">STUDY ALL 38 SOUNDS</button>
+ <button id="lweakBtn" class="big">WEAK SPOTS</button>
+ <h2>Drill</h2><div class="row"><button id="lst1" class="sel">Stage 1: Sound → Anchor</button><button id="lst2">Stage 2: Item → Sound</button></div>
+ <div id="ls1sel"><h2>Sounds to drill</h2><p class="hint">Stage 1: hear a pickup sound, pick its anchor.</p><div class="row" id="lbatches"></div><div id="lchecks" class="checks"></div></div>
+ <div id="ls2sel" hidden><h2>Rarities to drill</h2><p class="hint">Stage 2: see an item name, pick which sound (anchor) it makes. Covers every item of the checked rarities on the selected map; the pickup sound plays after you answer.</p><div id="lrar" class="checks"></div></div>
+ <h2>Questions</h2><div class="row" id="lcounts"></div><p class="hint">Adaptive: misses come back later until every card is right. Mastery (Stage 1): type each anchor once; scored with time.</p>
+ <p class="hint" id="linfo"></p>
+ <button id="lstart" class="big" disabled>START DRILL</button>
+</section>
+<section id="lstudy" hidden>
+ <div class="bar"><span id="lstudyTitle">Study</span><button id="lstudyBack" class="link">Back</button></div>
+ <div id="lstudyList"></div>
+</section>
+<section id="lweak" hidden>
+ <div class="bar"><span>Weak Spots · top 15 most-missed sounds</span><button id="lweakBack" class="link">Back</button></div>
+ <p class="hint">Misses from Learn drills and the Sound Quiz. Each miss adds 1 to a sound's weight; each later correct answer removes 0.5, so sounds drop off as you fix them. Stats are cumulative across all sessions (saved in this browser) until you press Reset. Practice uses only weak-spot sounds as wrong choices. Stage 2 practice drills every item whose sound is on this list.</p>
+ <div id="lweakList"></div>
+ <div id="lweakCtl"><h2>Practice</h2><p class="hint">Stage 1 / Stage 2 / Both use Adaptive (misses come back later). Stage 1 Mastery: type each anchor once, no second chances.</p><div class="row" id="lwst"><button data-w="1" class="sel">Stage 1</button><button data-w="2">Stage 2</button><button data-w="3">Both</button><button data-w="4">Stage 1 Mastery (typed)</button></div>
+ <button id="lweakGo" class="big">PRACTICE WEAK SPOTS</button></div>
+ <button id="lweakReset" class="link">Reset stats</button>
+</section>
+<section id="ldrill" hidden>
+ <div class="bar"><span id="lwhere"></span><span id="lscore"></span></div>
+ <div class="card"><p class="hint" id="lprompt"></p><div class="iname" id="lq"></div>
+  <div class="row" id="lplayrow"><button id="lpd">▶ Drop</button><button id="lpp">▶ Pick up</button><button id="lpb">▶ Both</button></div>
+  <div id="ltypewrap" hidden><div class="combo"><input id="ltype" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" role="combobox" aria-autocomplete="list" aria-controls="lsug" placeholder="Type the anchor…"><ul id="lsug" role="listbox" hidden></ul></div><button id="ltypeGo" class="big">SUBMIT</button></div><div id="lopts"></div><button id="lsubmit" class="big">SUBMIT</button><div id="lreveal" class="reveal" hidden></div><button id="lnext" class="big" hidden>NEXT</button></div>
+ <button id="lquit" class="link">Quit to menu</button>
+</section>
+<section id="done" hidden><h2>Session complete</h2><p id="final"></p><button id="again" class="big">MENU</button></section>
+</main>
+<footer>Data: abibuilder.com/merchant (scraped 2026-09-22, credit Maoyan). Sounds © MoreFun / Arena Breakout: Infinite.</footer>
+<script src="data.js"></script><script src="anchors.js"></script><script src="stats.js"></script><script src="quiz.js"></script><script src="icons.js"></script><script src="learn.js"></script></body></html>
