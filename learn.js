@@ -2,7 +2,7 @@
 const D=window.QUIZ_DATA,AN=window.ANCHORS,NOTES=window.ANCHOR_NOTES||{},$=id=>document.getElementById(id),byId={};D.items.forEach(i=>byId[i.id]=i);
 const SIDS=Object.keys(D.sounds).sort((a,b)=>a-b);
 const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
-const allScreens=['modesel','menu','imenu','quiz','iquiz','lmenu','lstudy','ldrill','lweak','done'];const show=ids=>allScreens.forEach(x=>$(x).hidden=!ids.includes(x));
+const allScreens=['modesel','menu','imenu','quiz','iquiz','lmenu','lstudy','ldrill','lweak','lfam','done'];const show=ids=>allScreens.forEach(x=>$(x).hidden=!ids.includes(x));
 let audio=new Audio();function play(names){let i=0;const go=()=>{if(i>=names.length)return;audio.src='audio/'+names[i++]+'.ogg';audio.onended=()=>setTimeout(go,250);audio.play().catch(()=>{})};go()}
 const snd=s=>D.sounds[s];
 function pool(){const p=$('lpool').value;return p==='ALL'?D.items:D.sets[D.combos[p]].map(id=>byId[id])}

@@ -21,7 +21,7 @@ window.__icons={makeQ,poolItems,pickTarget,weight};
 const SOUND=['menu'],ICON=['imenu'];
 function mode(m){$('mSound').classList.toggle('sel',m==='s');$('mIcon').classList.toggle('sel',m==='i');$('menu').hidden=m!=='s';$('imenu').hidden=m!=='i';$('mLearn').classList.toggle('sel',m==='l');$('lmenu').hidden=m!=='l'}
 $('mSound').onclick=()=>mode('s');window.__mode=mode;$('mIcon').onclick=()=>mode('i');
-const allScreens=['modesel','menu','imenu','quiz','iquiz','lmenu','lstudy','ldrill','lweak','done'];
+const allScreens=['modesel','menu','imenu','quiz','iquiz','lmenu','lstudy','ldrill','lweak','lfam','done'];
 const show=ids=>allScreens.forEach(x=>$(x).hidden=!ids.includes(x));
 // observe sound quiz screens to hide mode selector during sound quiz
 // pool buttons

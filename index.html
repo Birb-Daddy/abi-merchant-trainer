@@ -40,10 +40,11 @@
  <h2>Map filter (optional)</h2><select id="lpool"></select>
  <button id="lstudyBtn" class="big">STUDY ALL 38 SOUNDS</button>
  <button id="lweakBtn" class="big">WEAK SPOTS</button>
- <h2>Drill</h2><div class="row"><button id="lst1" class="sel">Stage 1: Sound → Anchor</button><button id="lst2">Stage 2: Item → Sound</button></div>
+ <h2>Drill</h2><div class="row"><button id="lst1" class="sel">Stage 1: Sound → Anchor</button><button id="lst3">Stage 2: Families</button><button id="lst2">Stage 3: Item → Sound</button></div>
  <div id="ls1sel"><h2>Sounds to drill</h2><p class="hint">Stage 1: hear a pickup sound, pick its anchor.</p><div class="row" id="lbatches"></div><div id="lchecks" class="checks"></div></div>
- <div id="ls2sel" hidden><h2>Rarities to drill</h2><p class="hint">Stage 2: see an item name, pick which sound (anchor) it makes. Covers every item of the checked rarities on the selected map; the pickup sound plays after you answer.</p><div id="lrar" class="checks"></div></div>
- <h2>Questions</h2><div class="row" id="lcounts"></div><p class="hint">Adaptive: misses come back later until every card is right. Mastery (Stage 1): type each anchor once; scored with time.</p>
+ <div id="ls2sel" hidden><h2>Rarities to drill</h2><p class="hint">Stage 3: see an item name, pick which sound (anchor) it makes. Covers every item of the checked rarities on the selected map; the pickup sound plays after you answer.</p><div id="lrar" class="checks"></div></div>
+ <div id="lcountsWrap"><h2>Questions</h2><div class="row" id="lcounts"></div><p class="hint">Adaptive: misses come back later until every card is right. Mastery (Stage 1): type each anchor once; scored with time.</p></div>
+ <div id="lfsel" hidden><h2>Sounds to drill</h2><p class="hint">Stage 2: hear a sound, then tick every item (of 10) that makes it. 1–4 are right each round; rounds continue until every family item has shown up. Only sounds with 3+ items on the selected map are listed. ▶ on a tile plays that item's own sound.</p><p class="hint" id="lfcount"></p><div class="row"><button id="lfall">All</button><button id="lfnone">None</button></div><div id="lfchecks" class="checks"></div><p class="hint" id="lfinfo"></p><button id="lfstart" class="big" disabled>START FAMILIES</button></div>
  <p class="hint" id="linfo"></p>
  <button id="lstart" class="big" disabled>START DRILL</button>
 </section>
@@ -66,7 +67,14 @@
   <div id="ltypewrap" hidden><div class="combo"><input id="ltype" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" role="combobox" aria-autocomplete="list" aria-controls="lsug" placeholder="Type the anchor…"><ul id="lsug" role="listbox" hidden></ul></div><button id="ltypeGo" class="big">SUBMIT</button></div><div id="lopts"></div><button id="lsubmit" class="big">SUBMIT</button><div id="lreveal" class="reveal" hidden></div><button id="lnext" class="big" hidden>NEXT</button></div>
  <button id="lquit" class="link">Quit to menu</button>
 </section>
+<section id="lfam" hidden>
+ <div class="bar"><span id="lfwhere"></span><span id="lfscore"></span></div>
+ <div class="card"><p class="hint" id="lfprompt"></p><div class="row"><button id="lfplay">▶ Pick up</button></div>
+  <div id="lftiles"></div><div id="lfres" class="reveal" hidden></div>
+  <button id="lfsubmit" class="big">SUBMIT</button><button id="lfnext" class="big" hidden>NEXT</button></div>
+ <button id="lfquit" class="link">Quit</button>
+</section>
 <section id="done" hidden><h2>Session complete</h2><p id="final"></p><button id="again" class="big">MENU</button></section>
 </main>
 <footer>Data: abibuilder.com/merchant (scraped 2026-09-22, credit Maoyan). Sounds © MoreFun / Arena Breakout: Infinite.</footer>
-<script src="data.js"></script><script src="anchors.js"></script><script src="stats.js"></script><script src="quiz.js"></script><script src="icons.js"></script><script src="learn.js"></script></body></html>
+<script src="data.js"></script><script src="anchors.js"></script><script src="stats.js"></script><script src="quiz.js"></script><script src="icons.js"></script><script src="learn.js"></script><script src="families.js"></script></body></html>
