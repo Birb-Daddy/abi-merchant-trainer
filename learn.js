@@ -12,11 +12,11 @@ const li=i=>'<li class="r-'+i.r+'">'+i.n+' <small>('+i.z+', ~'+i.p.toLocaleStrin
 $('mLearn').onclick=()=>window.__mode('l');
 $('lpool').innerHTML='<option value="ALL">All merchant items</option>'+Object.keys(D.combos).sort().map(c=>'<option>'+c+'</option>').join('');
 let stage=1,count=-1;const picked=new Set(SIDS);
-const RAR=['Mythic','Legendary','Epic','Rare','Common'].filter(r=>D.items.some(i=>i.r===r)),pickedR=new Set(RAR);
-$('lrar').innerHTML=RAR.map(r=>'<label class="r-'+r+'"><input type="checkbox" data-r="'+r+'" checked>'+r+' <small>('+D.items.filter(i=>i.r===r).length+')</small></label>').join('');
-document.querySelectorAll('#lrar input').forEach(c=>c.onchange=()=>{c.checked?pickedR.add(c.dataset.r):pickedR.delete(c.dataset.r);upd()});
-$('lst1').onclick=()=>{stage=1;$('lst1').classList.add('sel');$('lst2').classList.remove('sel');upd()};
-$('lst2').onclick=()=>{stage=2;$('lst2').classList.add('sel');$('lst1').classList.remove('sel');upd()};
+
+
+
+$('lst1').onclick=()=>{stage=1;$('lst1').classList.add('sel');upd()};
+
 $('lchecks').innerHTML=SIDS.map(s=>'<label><input type="checkbox" data-s="'+s+'" checked>'+s+' · '+AN[s]+'</label>').join('');
 const syncChecks=()=>document.querySelectorAll('#lchecks input').forEach(c=>c.checked=picked.has(c.dataset.s));
 document.querySelectorAll('#lchecks input').forEach(c=>c.onchange=()=>{c.checked?picked.add(c.dataset.s):picked.delete(c.dataset.s);upd()});
@@ -27,8 +27,8 @@ function applyBatches(){picked.clear();selB.forEach(k=>batchList[k][1].forEach(s
 batchList.forEach(([t],k)=>{const b=document.createElement('button');b.textContent=t;b.className='sel';b.onclick=()=>{selB.has(k)?selB.delete(k):selB.add(k);applyBatches()};bBtns.push(b);selB.add(k);$('lbatches').appendChild(b)});
 [['Adaptive',-1],['Mastery',-2],['10',10],['20',20],['Endless',0]].forEach(([t,n])=>{const b=document.createElement('button');b.textContent=t;b.dataset.n=n;if(n===-1){b.className='sel';b.title='Every selected card must be answered correctly once; misses come back later.'}if(n===-2){b.id='lmastBtn';b.title='Stage 1 only: hear each sound once and type its anchor. No second chances.'}b.onclick=()=>{count=n;document.querySelectorAll('#lcounts button').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');upd()};$('lcounts').appendChild(b)});
 $('lpool').onchange=upd;
-function usable(){return stage===1?[...picked]:pool().filter(i=>pickedR.has(i.r)).map(i=>i.id)}
-function upd(){if(stage===2&&count===-2){count=-1;document.querySelectorAll('#lcounts button').forEach(x=>x.classList.toggle('sel',x.dataset.n==='-1'))}$('lmastBtn').hidden=stage!==1;const u=usable();$('ls1sel').hidden=stage!==1;$('ls2sel').hidden=stage!==2;$('linfo').textContent=stage===1?u.length+' sound(s) selected.'+(u.length<2?' Pick at least 2 for Stage 1.':''):u.length+' item(s) selected.';$('lstart').disabled=!(count!==null&&u.length>=(stage===1?2:1))}
+function usable(){return [...picked]}
+function upd(){if(stage===2&&count===-2){count=-1;document.querySelectorAll('#lcounts button').forEach(x=>x.classList.toggle('sel',x.dataset.n==='-1'))}$('lmastBtn').hidden=stage!==1;const u=usable();$('ls1sel').hidden=stage!==1;$('linfo').textContent=stage===1?u.length+' sound(s) selected.'+(u.length<2?' Pick at least 2 for Stage 1.':''):u.length+' item(s) selected.';$('lstart').disabled=!(count!==null&&u.length>=(stage===1?2:1))}
 upd();
 // study
 $('lstudyBtn').onclick=()=>{const it=pool();$('lstudyTitle').textContent='Study · '+($('lpool').value==='ALL'?'All merchant items':$('lpool').value);
@@ -102,8 +102,8 @@ function weakPage(){const t=WS.top(15),enough=WS.total()>=3&&t.length>0;
 $('lweakBtn').onclick=weakPage;$('lweakBack').onclick=()=>show(['modesel','lmenu']);
 $('lweakReset').onclick=()=>{if(confirm('Reset all Weak Spots stats? This cannot be undone.')){WS.reset();weakPage()}};
 $('lweakGo').onclick=()=>{const items=pool(),ws=WS.top(15).map(x=>x.s),s2=items.filter(i=>ws.includes(String(i.s))).map(i=>i.id);
- let q;if(wst===1||wst===4)q=ws;else if(wst===2)q=s2;else q=ws.map(s=>'1:'+s).concat(s2.map(s=>'2:'+s));if(!q.length)return alert('No weak sounds have items on this map for Stage 2.');
- st={wset:ws,typed:wst===4,t0:Date.now(),stage:wst===3||wst===4?1:wst,both:wst===3,weak:true,set:ws,items,mastery:true,n:0,i:0,right:0,opt:0,optTot:0,recent:[],ans:false,queue:shuf(q),total:q.length,mastered:0,misses:{}};show(['ldrill']);next()};
+ const q=ws;if(!q.length)return alert('No weak sounds yet.');if(wst===5){const f=window.__fam.qualify().filter(s=>ws.includes(s));if(!f.length)return alert('None of your weak sounds have 3+ items on this map.');return window.__fam.start(f,true)}
+ st={wset:ws,typed:wst===4,t0:Date.now(),stage:1,both:false,weak:true,set:ws,items,mastery:true,n:0,i:0,right:0,opt:0,optTot:0,recent:[],ans:false,queue:shuf(q),total:q.length,mastered:0,misses:{}};show(['ldrill']);next()};
 window.__weak={weakPage};
 function famHtml(s){const f=family(s,st.items);return 'Sound '+s+' (“'+AN[s]+'”) family'+(f.length?' — '+f.length+' item(s):<ul>'+f.map(li).join('')+'</ul>':': none on this map.')+(NOTES[s]?'<div class="hint">'+NOTES[s]+'</div>':'')}
 function ans1(b){if(st.ans)return;st.ans=true;const ok=b.dataset.s===st.q.s;if(ok)st.right++;record(st.q.s,ok);

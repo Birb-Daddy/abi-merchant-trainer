@@ -40,11 +40,10 @@
  <h2>Map filter (optional)</h2><select id="lpool"></select>
  <button id="lstudyBtn" class="big">STUDY ALL 38 SOUNDS</button>
  <button id="lweakBtn" class="big">WEAK SPOTS</button>
- <h2>Drill</h2><div class="row"><button id="lst1" class="sel">Stage 1: Sound → Anchor</button><button id="lst3">Stage 2: Families</button><button id="lst2">Stage 3: Item → Sound</button></div>
+ <h2>Drill</h2><div class="row"><button id="lst1" class="sel">Stage 1: Sound → Anchor</button><button id="lst3">Stage 2: Families</button></div>
  <div id="ls1sel"><h2>Sounds to drill</h2><p class="hint">Stage 1: hear a pickup sound, pick its anchor.</p><div class="row" id="lbatches"></div><div id="lchecks" class="checks"></div></div>
- <div id="ls2sel" hidden><h2>Rarities to drill</h2><p class="hint">Stage 3: see an item name, pick which sound (anchor) it makes. Covers every item of the checked rarities on the selected map; the pickup sound plays after you answer.</p><div id="lrar" class="checks"></div></div>
  <div id="lcountsWrap"><h2>Questions</h2><div class="row" id="lcounts"></div><p class="hint">Adaptive: misses come back later until every card is right. Mastery (Stage 1): type each anchor once; scored with time.</p></div>
- <div id="lfsel" hidden><h2>Sounds to drill</h2><p class="hint">Stage 2: hear a sound, then tick every item (of 10) that makes it. 1–4 are right each round; rounds continue until every family item has shown up. Only sounds with 3+ items on the selected map are listed. ▶ on a tile plays that item's own sound.</p><p class="hint" id="lfcount"></p><div class="row"><button id="lfall">All</button><button id="lfnone">None</button></div><div id="lfchecks" class="checks"></div><p class="hint" id="lfinfo"></p><button id="lfstart" class="big" disabled>START FAMILIES</button></div>
+ <div id="lfsel" hidden><h2>Sounds to drill</h2><p class="hint">Stage 2: hear a sound, then tick every item (of 10) that makes it. Any number can be right; rounds continue until every family item has shown up. Only sounds with 3+ items on the selected map are listed. ▶ on a tile plays that item's own sound.</p><p class="hint" id="lfcount"></p><div class="row"><button id="lfall">All</button><button id="lfnone">None</button></div><div id="lfchecks" class="checks"></div><p class="hint" id="lfinfo"></p><button id="lfstart" class="big" disabled>START FAMILIES</button></div>
  <p class="hint" id="linfo"></p>
  <button id="lstart" class="big" disabled>START DRILL</button>
 </section>
@@ -54,9 +53,9 @@
 </section>
 <section id="lweak" hidden>
  <div class="bar"><span>Weak Spots · top 15 most-missed sounds</span><button id="lweakBack" class="link">Back</button></div>
- <p class="hint">Misses from Learn drills and the Sound Quiz. Each miss adds 1 to a sound's weight; each later correct answer removes 0.5, so sounds drop off as you fix them. Stats are cumulative across all sessions (saved in this browser) until you press Reset. Practice uses only weak-spot sounds as wrong choices. Stage 2 practice drills every item whose sound is on this list.</p>
+ <p class="hint">Misses from Learn drills and the Sound Quiz. Each miss adds 1 to a sound's weight; each later correct answer removes 0.5, so sounds drop off as you fix them. Stats are cumulative across all sessions (saved in this browser) until you press Reset. Practice uses only weak-spot sounds as wrong choices.</p>
  <div id="lweakList"></div>
- <div id="lweakCtl"><h2>Practice</h2><p class="hint">Stage 1 / Stage 2 / Both use Adaptive (misses come back later). Stage 1 Mastery: type each anchor once, no second chances.</p><div class="row" id="lwst"><button data-w="1" class="sel">Stage 1</button><button data-w="2">Stage 2</button><button data-w="3">Both</button><button data-w="4">Stage 1 Mastery (typed)</button></div>
+ <div id="lweakCtl"><h2>Practice</h2><p class="hint">Stage 1 uses Adaptive (misses come back later). Families drills your weak sounds that have 3+ items. Stage 1 Mastery: type each anchor once, no second chances.</p><div class="row" id="lwst"><button data-w="1" class="sel">Stage 1</button><button data-w="4">Stage 1 Mastery (typed)</button><button data-w="5">Families</button></div>
  <button id="lweakGo" class="big">PRACTICE WEAK SPOTS</button></div>
  <button id="lweakReset" class="link">Reset stats</button>
 </section>
